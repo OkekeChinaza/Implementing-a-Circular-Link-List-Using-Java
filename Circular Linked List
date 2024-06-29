@@ -1,0 +1,58 @@
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class CircularLinkedList {
+    Node head;
+
+    public CircularLinkedList() {
+        this.head = null;
+    }
+
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            head.next = head;
+        } else {
+            Node current = head;
+            while (current.next != head) {
+                current = current.next;
+            }
+            current.next = newNode;
+            newNode.next = head;
+        }
+    }
+
+    public void display() {
+        if (head == null) {
+            System.out.println("Circular Linked List is empty");
+        } else {
+            Node current = head;
+            System.out.print("Circular Linked List: ");
+            do {
+                System.out.print(current.data + " ");
+                current = current.next;
+            } while (current != head);
+            System.out.println();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CircularLinkedList list = new CircularLinkedList();
+
+        list.insert(10);
+        list.insert(20);
+        list.insert(30);
+
+        list.display();
+    }
+}
